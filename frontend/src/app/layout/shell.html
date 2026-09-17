@@ -1,0 +1,72 @@
+<div class="layout">
+  @if (mobileOpen()) { <div class="scrim" (click)="mobileOpen.set(false)"></div> }
+
+  <aside class="side" [class.open]="mobileOpen()">
+    <a class="brand" [routerLink]="home()" (click)="mobileOpen.set(false)">
+      <span class="mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>
+      </span>
+      Medora
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <div class="group">{{ roleLabel() }}</div>
+      @for (item of nav(); track item.path) {
+        <a [routerLink]="item.path" routerLinkActive="on"
+           [routerLinkActiveOptions]="{ exact: !!item.exact }"
+           (click)="mobileOpen.set(false)">
+          <ui-icon [name]="item.icon" [size]="17" />
+          {{ item.label }}
+          @if (item.icon === 'bell' && unread() > 0) { <span class="pill">{{ unread() }}</span> }
+        </a>
+      }
+    </nav>
+
+    <div class="who">
+      <ui-avatar [name]="user()?.name" size="sm" />
+      <div class="txt">
+        <div class="nm">{{ user()?.name }}</div>
+        <div class="rl">{{ roleLabel() }}</div>
+      </div>
+      <button type="button" class="icon-btn" (click)="logout()" aria-label="Se déconnecter" title="Se déconnecter">
+        <ui-icon name="logout" [size]="16" />
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="icon-btn mob-top" (click)="mobileOpen.set(!mobileOpen())"
+              aria-label="Ouvrir le menu">
+        <ui-icon name="menu" [size]="19" />
+      </button>
+
+      <span class="crumb">{{ current() }}</span>
+      <span class="spacer"></span>
+
+      <a class="icon-btn" [routerLink]="notifPath()" aria-label="Notifications">
+        <ui-icon name="bell" [size]="18" />
+        @if (unread() > 0) { <i class="dotmark"></i> }
+      </a>
+      <button type="button" class="icon-btn" (click)="chatOpen.set(!chatOpen())"
+              aria-label="Assistant Medora" title="Assistant Medora">
+        <ui-icon name="sparkle" [size]="18" />
+      </button>
+      <ui-avatar [name]="user()?.name" size="sm" />
+    </header>
+
+    <main><router-outlet /></main>
+
+    <nav class="mob-nav" aria-label="Navigation mobile">
+      @for (item of mobileNav(); track item.path) {
+        <a [routerLink]="item.path" routerLinkActive="on" [routerLinkActiveOptions]="{ exact: !!item.exact }">
+          <ui-icon [name]="item.icon" [size]="19" />
+          <span>{{ item.label.split(' ')[0] }}</span>
+        </a>
+      }
+    </nav>
+  </div>
+</div>
+
+@if (chatOpen()) { <app-assistant (closed)="chatOpen.set(false)" /> }
+<ui-toasts />

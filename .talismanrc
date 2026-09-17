@@ -1,0 +1,74 @@
+# Talisman allowlist.
+#
+# Every entry is a reviewed false positive. Checksums are content-based, so any
+# edit to one of these files makes Talisman scan it again and the entry has to be
+# re-reviewed. Nothing listed here is a real credential.
+#
+#   package-lock.json             base64 sha512 integrity hashes, and npm packages
+#                                 whose names contain "pass" (minipass, @inquirer/password)
+#   *.ts / *.css                  HTML form attributes (type="password",
+#                                 autocomplete="current-password" / "new-password"),
+#                                 storage key names, and a base64 data: URI for an
+#                                 inline SVG
+#   main/application.properties   only ${ENV_VAR} placeholders -- the real values come
+#                                 from the environment and are never committed
+#   test/application.properties   a test-only signing key used to sign throwaway
+#                                 tokens in the suite; no deployed environment uses it
+#   JwtServiceTest.java           the same test-only key, plus a second one used to
+#                                 prove a token signed with a different key is rejected
+#   README.md                     documentation placeholders and a Maven property
+#   Java sources / mvnw           Spring type names and fields that merely contain
+#                                 "password" (UsernamePasswordAuthenticationToken,
+#                                 passwordEncoder, MVNW_PASSWORD in the Maven wrapper)
+#   .env.example                  template with EMPTY values and a comment showing
+#                                 how to generate a key; the real .env is git-ignored
+fileignoreconfig:
+- filename: .env.example
+  checksum: d06eabf4bbece41161daab94db7849a5785490f27d0d46a72e7419b5e2ac44d7
+- filename: README.md
+  checksum: 2485e3e26c191bd027c64bffddce86cc5f5a2ab8fede619c8d6c7465674833cd
+- filename: frontend/package-lock.json
+  checksum: d071f192e4221972aa26b688f93f3125893d4b20ab5a05337fc4e2df13d6e288
+- filename: frontend/src/app/core/auth.ts
+  checksum: 32bedbd9d03f285b40a44361eee7c3823229b595b3eee76c048e2ce8c5fa0334
+- filename: frontend/src/app/core/mock/health.ts
+  checksum: 99508d3932cd697e6e33cbb3e30dad39fb9a846880cb4d72cc00c4ed1e03d92f
+- filename: frontend/src/app/core/models.ts
+  checksum: 8cc45f12c429ec0d58acdfd3d52583dc05206b4c8c0f0ef6c53ec4b0fa5680c0
+- filename: frontend/src/app/layout/assistant.ts
+  checksum: 9c1900b4b6119f2c6757f4e477b527477c9965beea52aab58e32697ad85d026a
+- filename: frontend/src/app/pages/login.ts
+  checksum: 7b1c588942f8bd057fe6bfcf9cce64137dc2d76441afd94652639da756f9c910
+- filename: frontend/src/app/pages/medecin/appointments.ts
+  checksum: 122fb802c2ab0a4e8b1c690b6228827138a47496c9f89862b47bfa76e125f1c3
+- filename: frontend/src/app/pages/patient/appointments.ts
+  checksum: dcc517577876f82cb1eefd442557a1d53bef1f6802f393af261bd3a253789a75
+- filename: frontend/src/app/pages/patient/book.ts
+  checksum: 55a23c5991495d0b079c27e56f98ee91b1d8fac98c8031547729954196e3cb48
+- filename: frontend/src/app/pages/register.ts
+  checksum: 606370f128bad1195fb897d1f66482747fdbfa852fb5bac694b87d9e71c210b3
+- filename: frontend/src/app/pages/settings.ts
+  checksum: ef52a89633c742f2d6eb78f6233bd1ba8bd3a49ac2777238a991fdab933d78c6
+- filename: frontend/src/app/ui/ui.ts
+  checksum: 65a6a219a8ff811ed828958293065e4d134570248df502584ea49ca3ffb67fb6
+- filename: frontend/src/styles.css
+  checksum: 1a9049857b196f219c4ec7293bb9d3007c04c74293ec97ca6a69fadb56c3d4ae
+- filename: src/main/resources/application.properties
+  checksum: 6acb1104129e594323fac742bf5b39c15d9deadae575d76e7747a9687e9d3dda
+- filename: src/test/java/org/example/gestionrendezvousmedic/services/JwtServiceTest.java
+  checksum: c20768060d8e64ea9d724d9e887cec52da788826e3683f62ddfa5a19c5a13f1a
+- filename: src/test/resources/application.properties
+  checksum: 476f93a265b68e1f3e561ac14b37752bced90dac1dab5fe2907f6792c0bc1c9c
+- filename: src/main/java/org/example/gestionrendezvousmedic/models/Medecin.java
+  checksum: 15df4366691427ea16035e14f0fb2232c750a5940c2c1c0ab2675f5631d10b2e
+- filename: src/main/java/org/example/gestionrendezvousmedic/services/JwtService.java
+  checksum: e0e20859e2c6a4e3f0d24b4ea0d57ed0f9c47b36afd67be24eca40f769461b47
+- filename: src/main/java/org/example/gestionrendezvousmedic/Controller/ChatController.java
+  checksum: 0b98f4f81f1c613e7243d9abae80a6c97ae9b528287ee4a3db6e88c03d0b318a
+- filename: src/main/java/org/example/gestionrendezvousmedic/security/JwtAuthFilter.java
+  checksum: 3dbd914124fe0ed52f08e80c3d384388e58bf2cfaa8ea8660dbce016381eff11
+- filename: mvnw
+  checksum: 9bd82c104d9f02af78ace97ca594f24fe5595444aac20ee8aa875d4353de7090
+- filename: src/main/java/org/example/gestionrendezvousmedic/services/AuthenticationService.java
+  checksum: ea76eba08f725f21f3cf74d001ba16c45c9a30f6aedcd12c97c67994ed30fae9
+version: "1.0"
