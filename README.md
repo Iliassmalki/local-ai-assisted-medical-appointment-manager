@@ -1,10 +1,8 @@
 # Medora — Medical Consultation Manager
 
-A full-stack medical appointment platform: an **Angular 20** single-page application on top of a
-**Spring Boot 3 / Spring Security** REST API, with **JWT authentication** and **role-based access
-control** across three separate consoles (patient, practitioner, administrator), a **MySQL**
-persistence layer, and a French-language assistant backed by a **locally hosted Mistral model**
-through **langchain4j + Ollama**.
+A full-stack medical appointment platform built with Angular 20 and Spring Boot 3, featuring
+role-based portals and a French AI assistant powered by a locally hosted Mistral model via
+LangChain4j and Ollama.
 
 | | |
 |---|---|
