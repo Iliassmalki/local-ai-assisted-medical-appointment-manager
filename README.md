@@ -1,4 +1,4 @@
-# Medora — Medical Consultation Manager
+# Local AI Assisted Medical Appointment Manager
 
 A full-stack medical appointment platform built with Angular 20 and Spring Boot 3, featuring
 role-based portals and a French AI assistant powered by a locally hosted Mistral model via
@@ -18,8 +18,8 @@ LangChain4j and Ollama.
 ## Overview
 
 Booking a medical appointment by phone is lossy: the patient has no record of what was agreed, and
-the practitioner has no single place to see the day's requests. Medora replaces that exchange with a
-request/approval workflow backed by a single source of truth.
+the practitioner has no single place to see the day's requests. **Medora**, the application built
+here, replaces that exchange with a request/approval workflow backed by a single source of truth.
 
 **The core workflow**
 
